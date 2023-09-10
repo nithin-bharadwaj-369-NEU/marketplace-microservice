@@ -24,20 +24,18 @@ public class ProductServiceImpl implements ProductService{
                             .description(productRequest.getDescription()).price(productRequest.getPrice()).build();
 
         productRepository.save(product);
-        log.info("Product Saved : ", product);
+        log.info("Product Saved: {}", product.getId());
         return true;
     }
 
     @Override
     public List<ProductResponse> getAllProducts() {
         List<Product> products = productRepository.findAll();
-        products.stream().map(product -> mapToProductResponse(product)).toList();
-        return null;
+        return products.stream().map(product -> mapToProductResponse(product)).toList();
     }
 
     public ProductResponse mapToProductResponse(Product p){
         return ProductResponse.builder().id(p.getId()).name(p.getName()).description(p.getDescription()).price(p.getPrice()).build();
     }
-
 
 }

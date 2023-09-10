@@ -20,7 +20,7 @@ public class ProductController {
     public ResponseEntity<String> createProduct(@RequestBody ProductRequest productRequest){
         boolean createStatus = productService.createProduct(productRequest);
         if(createStatus){
-            return ResponseEntity.ok().body("Created Product Successfully");
+            return ResponseEntity.status(HttpStatus.CREATED).body("Created Product Successfully");
         }
         return ResponseEntity.internalServerError().build();
     }
